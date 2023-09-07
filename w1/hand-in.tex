@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage[outputdir=build]{minted}
+\usepackage{amssymb,amsmath}
+\usepackage[margin=1in]{geometry}
+
+\title{Cryptology Exercise Week 1}
+\author{Zijun Yu 202203581}
+\date{September 2023}
+
+\begin{document}
+
+\maketitle
+
+We first calculate the frequency of each letter in Python. Part of the output looks like this:
+
+\begin{minted}{python}
+('C', 32), ('B', 21), ('K', 20), ('P', 20),
+\end{minted}
+
+The 4 most frequent English letters are E, T, A, and O. Let's try matching C with E and B with T.
+According to the index of the letters, We get:
+
+\begin{align*}
+    4a + b  & \equiv 2 \pmod{26} \\
+    19a + b & \equiv 1 \pmod{26}
+\end{align*}
+
+Solving the equations yields $a = 19, b = 4$. So the encryption function is $f(x) = 19 x + 4 \pmod{26}$. And the corresponding
+decryption function is $f^{-1}(x) = 11 * (x - 4) \pmod{26}$, where 11 is the inverse of 19 modulo 26.
+
+By applying the decryption function to the ciphertext, we get the plaintext:
+
+\begin{minted}{text}
+OCANADATERREDENOSAIEUXTON...
+\end{minted}
+
+And ChatGPT translated this text without spaces to the following English version:
+
+\begin{minted}{text}
+Canada, land of our ancestors, thy brow is wreathed with glorious jewels.
+In thy armoured embrace, both the sword and the cross thou dost bear. Thy
+history is an epic of the most brilliant exploits, and thy valour steeped
+in faith will protect our homes and our rights.
+\end{minted}
+\end{document}
