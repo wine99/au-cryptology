@@ -17,7 +17,9 @@
 
 \subsection*{Part 1}
 
-Let's first look at the $f$-function, we observe that
+Let's first look at the $f$-function. Because the function $E$ simply
+does permutation on its input (with some bits duplicated), we have
+$E(\overline{R}) = \overline{E(R)}$. So we further have that
 $$
     f(\overline{R}, \overline{K}) = P(S(\overline{K} \oplus E(\overline{R})))
     = P(S(\overline{K} \oplus \overline{E(R)})) = P(S(K \oplus E(R))) = f(R,K)

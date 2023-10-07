@@ -26,7 +26,7 @@ is
         & \ \ \ \oplus [0, 0, S(a_{2,2}), 0] \\
         & \ \ \ \oplus [0, 0, 0, S(a_{3,3})]) \\
         = & MC([S(a_{0,0}), 0, 0, 0]) \\
-        & \oplus MC([0, S(a_{1,1}, 0, 0)]) \\
+& \oplus MC([0, S(a_{1,1}), 0, 0]) \\
         & \oplus MC([0, 0, S(a_{2,2}), 0]) \\
         & \oplus MC([0, 0, 0, S(a_{3,3})]) \\
         = & T_0(a_{0,0}) \oplus T_1(a_{1,1}) \oplus T_2(a_{2,2}) \oplus T_3(a_{3,3})
@@ -44,17 +44,11 @@ Similarly, the rest of each column are
 
 \subsection*{Implementation}
 
-For S-box, we use a table that has 256 entries, each containing
-the S-box output for the respective input byte.
-
-Besides the S-box operation, we also have a MixColumns operation in the $T$ function,
-so for each of $T_0, T_1, T_2, T_3$, we have a table that has 256 entries,
-mapping from the input byte, i.e. the result of $S(a)$, to the output 4-byte column.
-Then each $T$ function is a composition of the two table lookups.
-
-Finally we apply the XOR operations shown in the above equations and in the
-$AddRoundkey$ operation.
-
-The memory usage of the tables is $256 + 4 * 4 * 256 = 4352$ bytes.
+For each of $T_0, T_1, T_2, T_3$, we create a table that has 256 entries,
+mapping from the input byte, i.e $a_{ij}$, to the output 4-byte column.
+Then in each round of AES, we can simply do table lookups for each byte
+followed by XOR operations to obtain $R$ and then XOR $R$ with the round key
+to get the final rsesult of each round.
+The memory usage of the tables is $4 * 4 * 256\text{B} = 4$KB.
 
 \end{document}
