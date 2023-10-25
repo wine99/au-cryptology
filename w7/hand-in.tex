@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage[left=1in,right=1in,bottom=0.8in,top=0.8in]{geometry}
+\geometry{a4paper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage[outputdir=build]{minted}
+
+\title{Cryptology Exercise Week 7}
+\author{Zijun Yu 202203581}
+\date{Octobor 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{RSA is hard to break almost everywhere}
+
+If $z \notin \mathbb{Z}_n^*$, it means $gcd(z, n) \neq 1$. Since $n$ is the product of
+two prime numbers $p$ and $q$, we immediately know that $gcd(z, n)$ is either $p$ or $q$.
+In either case, we can compute both $p$ and $q$ and then compute the secret key $d$.
+
+If $z \in \mathbb{Z}_n^*$, we randomly pick an $a$ in $\mathbb{Z}_n^*$, and compute
+$z \cdot a^e \mod n$. We know that $z \cdot a ^ e \equiv x^e \cdot a^e \equiv (x \cdot a \text{ mod } n)^e \mod n$.
+From theorems in group theory, we konw that modular mulplication is a bijection and so because $Pr[a \in S] = \epsilon$,
+we have $Pr[a \cdot x \mod n \in S] = \epsilon$. Therefore, we use $a \cdot x \mod n$ as the input to $A$ and
+we have $\epsilon$ probility that we will get the plaintext of $a \cdot x \mod n$ and we can compute $x$
+by multiplying the inverse of $a$.
+
+\end{document}
