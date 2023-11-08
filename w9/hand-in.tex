@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[left=1in,right=1in,bottom=0.8in,top=0.8in]{geometry}
+\geometry{a4paper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage[outputdir=build]{minted}
+
+\title{Cryptology Exercise Week 9}
+\author{Zijun Yu 202203581}
+\date{Octobor 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{CPA security of El Gamal}
+
+The adversary $Adv$ plays the CPA game, which means that it has the public keys
+$G$, $\alpha$, and $\alpha^a$. It then chooses a message $m$ and sends to the oracle,
+and gets back $(\alpha^r, x)$. Let $G$, $\alpha$, $\alpha^a$, $\alpha^r$, and $x\cdot m^{-1}$ be
+the inputs to $B$, namely $G$, $\alpha$, $\alpha^a$, $\alpha^b$, and $\alpha^c$. So $r=b$.
+Then notice that $x$ is either $\alpha^{ab}\cdot m$ when we are in the real world,
+or $\alpha^{ab}\cdot s$, for some random $s$, when we are in the ideal world. We can rewrite
+$\alpha^{ab} \cdot s = \alpha^{ab} \cdot m \cdot \alpha^{t} = \alpha^{abt} \cdot m$.
+Because $s$ is uniformly random, $abt$ is also uniformly random. This means that the oracle
+is either responding with $\alpha^{ab}\cdot m$ or $\alpha^{c}\cdot m$, for a uniformly random $c$.
+The adversary $Adv$ can distinguish between these two cases with advantage $\epsilon$, which means
+that it can guess whether $c = ab$ or $c$ is random with advantage
+$\epsilon$. Hence we simply let $B$ output the same as $Adv$ does and $B$ has $\epsilon$ advantage
+in playing the DDH game.
+\end{document}
