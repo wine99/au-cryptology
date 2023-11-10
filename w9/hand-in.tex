@@ -25,11 +25,10 @@ and gets back $(\alpha^r, x)$. Let $G$, $\alpha$, $\alpha^a$, $\alpha^r$, and $x
 the inputs to $B$, namely $G$, $\alpha$, $\alpha^a$, $\alpha^b$, and $\alpha^c$. So $r=b$.
 Then notice that $x$ is either $\alpha^{ab}\cdot m$ when we are in the real world,
 or $\alpha^{ab}\cdot s$, for some random $s$, when we are in the ideal world. We can rewrite
-$\alpha^{ab} \cdot s = \alpha^{ab} \cdot m \cdot \alpha^{t} = \alpha^{abt} \cdot m$.
-Because $s$ is uniformly random, $abt$ is also uniformly random. This means that the oracle
-is either responding with $\alpha^{ab}\cdot m$ or $\alpha^{c}\cdot m$, for a uniformly random $c$.
-The adversary $Adv$ can distinguish between these two cases with advantage $\epsilon$, which means
-that it can guess whether $c = ab$ or $c$ is random with advantage
-$\epsilon$. Hence we simply let $B$ output the same as $Adv$ does and $B$ has $\epsilon$ advantage
-in playing the DDH game.
+$\alpha^{ab} \cdot s = \alpha^{ab} \cdot m \cdot \alpha^{t} = \alpha^{ab+t} \cdot m$.
+Because $s$ is uniformly random, $ab+t$ is also uniformly random. This means that the oracle
+is always responding with $x = \alpha^{c}\cdot m$, where $c$ is either $ab$ or uniformly random,
+and $Adv$ can distinguish between these two cases with advantage $\epsilon$.
+We then simply let $B$ output the same as $Adv$ does and $B$ will have $\epsilon$ advantage
+at distinguishing $c$ is $ab$ or uniformly random in $\alpha^{c}$ (since $x\cdot m^{-1}$ is exactly $\alpha^{c}$).
 \end{document}
