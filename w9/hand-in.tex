@@ -19,16 +19,19 @@
 
 \section*{CPA security of El Gamal}
 
-The adversary $Adv$ plays the CPA game, which means that it has the public keys
-$G$, $\alpha$, and $\alpha^a$. It then chooses a message $m$ and sends to the oracle,
-and gets back $(\alpha^r, x)$. Let $G$, $\alpha$, $\alpha^a$, $\alpha^r$, and $x\cdot m^{-1}$ be
-the inputs to $B$, namely $G$, $\alpha$, $\alpha^a$, $\alpha^b$, and $\alpha^c$. So $r=b$.
-Then notice that $x$ is either $\alpha^{ab}\cdot m$ when we are in the real world,
-or $\alpha^{ab}\cdot s$, for some random $s$, when we are in the ideal world. We can rewrite
-$\alpha^{ab} \cdot s = \alpha^{ab} \cdot m \cdot \alpha^{t} = \alpha^{ab+t} \cdot m$.
-Because $s$ is uniformly random, $ab+t$ is also uniformly random. This means that the oracle
-is always responding with $x = \alpha^{c}\cdot m$, where $c$ is either $ab$ or uniformly random,
-and $Adv$ can distinguish between these two cases with advantage $\epsilon$.
-We then simply let $B$ output the same as $Adv$ does and $B$ will have $\epsilon$ advantage
-at distinguishing $c$ is $ab$ or uniformly random in $\alpha^{c}$ (since $x\cdot m^{-1}$ is exactly $\alpha^{c}$).
+The algorithm $B$ works by sending $(\alpha^b, \alpha^c \cdot m)$ to $Adv$ and outputs
+the same result as A does.
+
+In the case where $B$ is called on $(\alpha^a, \alpha^b, \alpha^c)$ where $c = ab$,
+what $Adv$ sees is identical to interacting with the “real” oracle. In the case where $B$
+is called on $(\alpha^a, \alpha^b, \alpha^c)$ where $c$ is random, what $Adv$ sees
+is that it is talking to the "ideal" oracle, since $\alpha^c \cdot m$ is indistinguishable
+from the encryption of a random message, which is what the "ideal" oracle does,
+i.e. $\alpha^{ab} \cdot r$. (Given $c$ and $r$ are uniformly random values
+from the group, $\alpha^c \cdot m$ and $\alpha^{ab} \cdot r$ are also two uniformly random values,
+hence they are indistinguishable.)
+
+This construction thus turns an adversary that breaks El-Gamal into one that breaks DDH with the same
+advantage.
+
 \end{document}
